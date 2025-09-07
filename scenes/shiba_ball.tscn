@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://dgepd3nqfbmtp"]
+
+[ext_resource type="Texture2D" uid="uid://ccnhvjdnthmq2" path="res://Assets/Ball_1.png" id="1_bhr0q"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bhr0q"]
+bounce = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4jtwi"]
+blend_mode = 1
+albedo_texture = ExtResource("1_bhr0q")
+emission_enabled = true
+emission_energy_multiplier = 0.2
+emission_texture = ExtResource("1_bhr0q")
+texture_filter = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_c1eog"]
+radial_segments = 6
+rings = 3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4jtwi"]
+radius = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bhr0q"]
+
+[node name="Shiba-ball" type="RigidBody3D" groups=["BallColl"]]
+physics_material_override = SubResource("PhysicsMaterial_bhr0q")
+gravity_scale = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_4jtwi")
+mesh = SubResource("SphereMesh_c1eog")
+
+[node name="Area3D" type="Area3D" parent="." groups=["Ball"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_4jtwi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_bhr0q")

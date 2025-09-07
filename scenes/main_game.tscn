@@ -1,0 +1,111 @@
+[gd_scene load_steps=15 format=3 uid="uid://cuqky5tjpv3bo"]
+
+[ext_resource type="Script" uid="uid://dkej6213jvc28" path="res://scripts/hitter.gd" id="1_72e8q"]
+[ext_resource type="Texture2D" uid="uid://ct28dcmaml0ff" path="res://Assets/Skies.png" id="1_d2op2"]
+[ext_resource type="Script" uid="uid://b7cf5pjc80mgj" path="res://scripts/spawner.gd" id="1_s3esy"]
+[ext_resource type="Script" uid="uid://cawmodjxn8kyx" path="res://scripts/mesh_instance_3d.gd" id="2_0rdsr"]
+[ext_resource type="Script" uid="uid://c4f0pgthfhfsd" path="res://scenes/label.gd" id="4_ygxny"]
+[ext_resource type="Script" uid="uid://b1n2r72yusltk" path="res://scenes/damage.gd" id="5_ipu61"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0rdsr"]
+albedo_texture = ExtResource("1_d2op2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ipu61"]
+blend_mode = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_d2op2")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ygxny"]
+material = SubResource("StandardMaterial3D_ipu61")
+size = Vector2(20, 20)
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_wi4c7"]
+turbidity = 0.0
+sun_disk_scale = 0.0
+energy_multiplier = 0.0
+use_debanding = false
+
+[sub_resource type="Sky" id="Sky_70vka"]
+sky_material = SubResource("PhysicalSkyMaterial_wi4c7")
+
+[sub_resource type="Environment" id="Environment_72e8q"]
+background_mode = 2
+sky = SubResource("Sky_70vka")
+tonemap_mode = 2
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_q7yvd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ygxny"]
+size = Vector3(10, 4, 10)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(40, 0, 0, 0, -40, -6.03983e-06, 0, 6.03983e-06, -40, 140, 100, 0)
+material_override = SubResource("StandardMaterial3D_0rdsr")
+mesh = SubResource("PlaneMesh_ygxny")
+skeleton = NodePath("../WorldEnvironment")
+script = ExtResource("2_0rdsr")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_72e8q")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+fov = 100.0
+script = ExtResource("1_72e8q")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera3D"]
+
+[node name="Label" type="Label" parent="Camera3D/CanvasLayer"]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 257.27
+offset_bottom = 147.0
+scale = Vector2(0.2, 0.2)
+theme_override_colors/font_color = Color(5.77569e-06, 0.887141, 0.906998, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.658483, 0.426672, 1)
+theme_override_colors/font_outline_color = Color(0.742214, 0.693013, 1, 1)
+theme_override_constants/shadow_offset_x = 25
+theme_override_constants/shadow_offset_y = 20
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 100
+text = "HP: 3"
+script = ExtResource("4_ygxny")
+
+[node name="Boundaries" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Boundaries"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, -3, 4.37114e-08)
+shape = SubResource("WorldBoundaryShape3D_q7yvd")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Boundaries"]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.44439e-08, -0.965926, -0.258819, 2.26267e-08, -0.258819, 0.965926, 0, 3, -4.37114e-08)
+shape = SubResource("WorldBoundaryShape3D_q7yvd")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Boundaries"]
+transform = Transform3D(-5.35353e-08, 0.965926, 0.258819, -1, -5.50247e-08, -1.48943e-09, 1.28028e-08, -0.258819, 0.965926, -5, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_q7yvd")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Boundaries"]
+transform = Transform3D(1.15353e-07, -0.965926, -0.258819, 1, 1.19821e-07, -1.48943e-09, 3.24506e-08, -0.258819, 0.965926, 5, 0, 0)
+shape = SubResource("WorldBoundaryShape3D_q7yvd")
+
+[node name="Spawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+script = ExtResource("1_s3esy")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.799465, -0.389861, -0.457017, 0, 0.760791, -0.648997, 0.600713, 0.51885, 0.608226, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+script = ExtResource("5_ipu61")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_ygxny")
+
+[connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
