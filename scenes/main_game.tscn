@@ -126,4 +126,20 @@ mesh = SubResource("BoxMesh_ygxny")
 transform = Transform3D(-0.99273425, 0.06712952, 0.09986158, 7.920708e-09, 0.8299148, -0.55788994, -0.12032749, -0.55383646, -0.823885, -0.21651936, 4.2384777, 1.842082)
 mesh = SubResource("BoxMesh_ygxny")
 
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.89866394, 0.24471164, 0.36403206, 0, 0.8299149, -0.55789, -0.4386378, 0.50135565, 0.7458146, 2.6945224, 4.2384777, 0)
+mesh = SubResource("BoxMesh_ygxny")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.96403515, -0.14827313, -0.2205705, 0, 0.8299149, -0.55789, 0.26577485, 0.5378256, 0.8000672, 4.5466905, 4.2384777, 0)
+mesh = SubResource("BoxMesh_ygxny")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.8239383, -0.31614476, -0.47029573, 0, 0.8299149, -0.55789, 0.5666794, -0.459667, -0.68379873, 4.5365133, 4.2384777, 1.5682502)
+mesh = SubResource("BoxMesh_ygxny")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.99273425, 0.06712952, 0.09986158, 7.920708e-09, 0.8299148, -0.55788994, -0.12032749, -0.55383646, -0.823885, 2.7046993, 4.2384777, 1.842082)
+mesh = SubResource("BoxMesh_ygxny")
+
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
