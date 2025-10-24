@@ -2,3 +2,6 @@ This is example if the main repo gets updated and all branches need to be update
 
 
 LEts say main repo got updated
+
+
+All good :DD 
