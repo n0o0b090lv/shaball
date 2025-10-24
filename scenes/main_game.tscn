@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cuqky5tjpv3bo"]
+[gd_scene load_steps=16 format=3 uid="uid://cuqky5tjpv3bo"]
 
 [ext_resource type="Script" uid="uid://dkej6213jvc28" path="res://scripts/hitter.gd" id="1_72e8q"]
 [ext_resource type="Texture2D" uid="uid://ct28dcmaml0ff" path="res://Assets/Skies.png" id="1_d2op2"]
@@ -38,6 +38,8 @@ tonemap_mode = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ygxny"]
 size = Vector3(10, 4, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ygxny"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -107,5 +109,9 @@ script = ExtResource("5_ipu61")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_ygxny")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8299149, -0.55789, 0, 0.55789, 0.8299149, -0.22669637, 4.2384777, 0)
+mesh = SubResource("BoxMesh_ygxny")
 
 [connection signal="body_entered" from="Area3D" to="Area3D" method="_on_body_entered"]
